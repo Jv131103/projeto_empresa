@@ -1,0 +1,9 @@
+Rodar o teste sem abrir o plugin:
+    pytest
+
+Rodar com plugin:
+    pytest --headed
+
+        OU
+
+    pytest --playwright
