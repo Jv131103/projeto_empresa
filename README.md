@@ -66,10 +66,12 @@ pytest --verbose
 O projeto tem como objetivo automatizar testes na plataforma SauceDemo utilizando Playwright com pytest, proporcionando uma estrutura simples, clara e eficiente para validar funcionalidades básicas da aplicação.
 
 ### project/
-.
+```terminal
+. 
 ├── config_playwrite.py
 │
 └── saucedemo.py
+```
 
 #### config_playwrite.py
 
@@ -252,8 +254,10 @@ Se o arquivo for executado diretamente (python saucedemo.py), o seguinte fluxo �
 Esse fluxo simula um comportamento real de navegação e valida aspectos da interface que poderiam causar erros no uso da aplicação.
 
 ### tests/
+```terminal
 .
 └── test_saucedemo.py
+```
 
 #### test_saucedemo.py
 
