@@ -61,6 +61,42 @@ OU
 pytest --verbose
 ```
 
+## Você também pode rodar com Docker:
+
+1. Monte a imagem:
+
+```terminal
+docker build -t saucedemo-project .
+```
+
+2. Execute em headless:
+```terminal
+docker run --rm saucedemo-project
+```
+
+3. Se estiver no linux e quiser rodar com interface.
+
+    - No arquivo test_saucedemo.py em tests, habilite:
+
+    ```python
+    @pytest.fixture(scope="module")
+    def site():
+        # Inicializa a instância para todos os testes do módulo
+        site = SaucedemoMarket("https://www.saucedemo.com/", headless=False)
+        yield site
+        site.close_site()
+    ```
+
+    - Salve e suba denovo com build.
+
+    - Execute no terminal
+
+    ```terminal
+    xhost +local:docker
+    docker run --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix saucedemo-project
+    ```
+
+
 ## Sobre o projeto
 
 O projeto tem como objetivo automatizar testes na plataforma SauceDemo utilizando Playwright com pytest, proporcionando uma estrutura simples, clara e eficiente para validar funcionalidades básicas da aplicação.
@@ -139,6 +175,12 @@ Quando executado diretamente (__main__), ele:
     Fecha o navegador.
 
 Esse arquivo é útil tanto para testes manuais rápidos quanto como base para outros módulos de automação.
+
+PS >>> Se quiser rodar apenas ele para testar execute na raiz do projeto:
+
+```terminal
+python -m project.config_playwrite
+```
 
 #### saucedemo.py
 
@@ -252,6 +294,12 @@ Se o arquivo for executado diretamente (python saucedemo.py), o seguinte fluxo �
     Finaliza e fecha o navegador.
 
 Esse fluxo simula um comportamento real de navegação e valida aspectos da interface que poderiam causar erros no uso da aplicação.
+
+PS >>> Se quiser rodar apenas ele para testar execute na raiz do projeto:
+
+```terminal
+python -m project.saucedemo
+```
 
 ### tests/
 ```terminal

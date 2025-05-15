@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
-from config_playwrite import SiteExtractor
 from playwright.sync_api import Error, TimeoutError
+
+from project.config_playwrite import SiteExtractor
 
 
 class SaucedemoMarket(SiteExtractor):
@@ -15,7 +16,7 @@ class SaucedemoMarket(SiteExtractor):
         # Substituições para facilitar o parse
         content = content.replace("Accepted usernames are:", "usernames").replace("Password for all users:", "password")
         list_information = content.split()
-        
+
         # Verifica se os termos estão presentes para evitar erro
         if "usernames" not in list_information or "password" not in list_information:
             raise ValueError("Formato da página inesperado.")
