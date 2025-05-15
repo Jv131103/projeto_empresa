@@ -1,6 +1,8 @@
-from playwright.sync_api import sync_playwright, Playwright, Browser, Page
 from time import sleep
-from typing import Optional
+from typing import Optional, Union
+
+from playwright.sync_api import (Browser, ElementHandle, Page, Playwright,
+                                 sync_playwright)
 
 
 class SiteExtractor:
@@ -38,9 +40,27 @@ class SiteExtractor:
         assert self.page is not None, "Browser page is not initialized"
         self.page.click(selector)
 
+    def select_option_element(self, selector: str, option_value: str) -> None:
+        assert self.page is not None, "Browser page is not initialized"
+        self.page.select_option(selector, option_value)
+
+    def query_all(self, selector: str) -> list[ElementHandle]:
+        return self.page.query_selector_all(selector)
+
+    def query_one(self, selector: str) -> Optional[ElementHandle]:
+        return self.page.query_selector(selector)
+
     def get_inner_text(self, selector: str) -> str:
         assert self.page is not None, "Browser page is not initialized"
         return self.page.inner_text(selector)
+
+    def get_content_html(self) -> str:
+        assert self.page is not None, "Browser page is not initialized"
+        return self.page.content()
+
+    def execute_js(self, script: str) -> None:
+        assert self.page is not None, "Browser page is not initialized"
+        self.page.evaluate(script)
 
     def close(self) -> None:
         if self.browser is not None:

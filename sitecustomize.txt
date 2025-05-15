@@ -1,0 +1,21 @@
+import sys
+from pathlib import Path
+
+# Caminho absoluto para a raiz do projeto (calculado a partir do local do script)
+project_root = Path().cwd()
+
+# Adiciona a raiz do projeto ao sys.path
+sys.path.append(str(project_root))
+
+# Garante que a pasta src esteja no sys.path
+src_path = Path(__file__).cwd() / "project"  # sobe 2 níveis até 'src'
+if str(src_path) not in sys.path:
+    sys.path.append(str(src_path))
+
+# Imprime para garantir que a raiz foi adicionada corretamente.
+# PS: Apenas para testes
+# print("==" * 40)
+# print(f"Raiz do projeto adicionada ao sys.path: {project_root}")
+# print(f"Pasta SRC adicionda ao sys.path: {src_path}")
+# print("AMBIENTE INICIADO!!!")
+# print("==" * 40)
