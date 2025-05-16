@@ -75,7 +75,7 @@ class SaucedemoMarket(SiteExtractor):
             option_value = "lohi" if low_to_high else "hilo"
             self.wait_for_element(selector)
             self.select_option_element(selector, option_value)
-            self.wait_for(2)
+            self.wait_for(4)
             return True
         except (TimeoutError, Error):
             return False
@@ -103,6 +103,7 @@ class SaucedemoMarket(SiteExtractor):
             cart_number = int(cart)
         except ValueError:
             cart_number = 0
+        self.wait_for(4)
         return cart_number == qtd_prices
 
     def clear_cart(self):
@@ -127,6 +128,7 @@ class SaucedemoMarket(SiteExtractor):
 
     def has_dog_image(self) -> bool:
         sources = self.get_all_image_sources()
+        self.wait_for(4)
         for src in sources:
             if "sl-404" in src or "dog" in src:
                 return True

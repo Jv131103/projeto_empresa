@@ -1,5 +1,5 @@
 from time import sleep
-from typing import Optional, Union
+from typing import Optional
 
 from playwright.sync_api import (Browser, ElementHandle, Page, Playwright,
                                  sync_playwright)
@@ -45,10 +45,10 @@ class SiteExtractor:
         self.page.select_option(selector, option_value)
 
     def query_all(self, selector: str) -> list[ElementHandle]:
-        return self.page.query_selector_all(selector)
+        return self.page.query_selector_all(selector)  # type: ignore
 
     def query_one(self, selector: str) -> Optional[ElementHandle]:
-        return self.page.query_selector(selector)
+        return self.page.query_selector(selector)  # type: ignore
 
     def get_inner_text(self, selector: str) -> str:
         assert self.page is not None, "Browser page is not initialized"
